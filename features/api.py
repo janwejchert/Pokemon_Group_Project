@@ -80,3 +80,40 @@ def get_damaging_moves(move_names: tuple) -> list:
         if checked >= 50:
             break
     return damaging
+
+def get_type_effectiveness(move_type: str, defender_types: tuple) -> float:
+    """Return type-effectiveness multiplier against the defender's types."""
+    type_data = fetch_type(move_type)
+    if type_data is None:
+        return 1.0
+
+    dr = type_data["damage_relations"]
+    double_damage_to = [t["name"] for t in dr["double_damage_to"]]
+    half_damage_to   = [t["name"] for t in dr["half_damage_to"]]
+    no_damage_to     = [t["name"] for t in dr["no_damage_to"]]
+
+    effectiveness = 1.0
+    for d_type in defender_types:
+        if d_type in double_damage_to:
+            effectiveness *= 2.0
+        elif d_type in half_damage_to:
+            effectiveness *= 0.5
+        elif d_type in no_damage_to:
+            effectiveness *= 0.0
+
+    return effectiveness
+
+
+def effectiveness_label(eff: float) -> str:
+    """Return a human-readable label based on the type-effectiveness multiplier."""
+    if eff == 0.0:
+        return "No effect!"
+    elif eff >= 4.0:
+        return "It's ultra effective!"
+    elif eff >= 2.0:
+        return "It's super effective!"
+    elif eff <= 0.25:
+        return "It's barely effective…"
+    elif eff < 1.0:
+        return "It's not very effective…"
+    return ""
