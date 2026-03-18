@@ -25,6 +25,12 @@ def build_battle_log_df(battle_log: list) -> pd.DataFrame:
     return pd.DataFrame(battle_log)
 
 
+def build_hp_history_df(hp_history: list) -> pd.DataFrame:
+    """
+    Convert hp_history list of dicts to a DataFrame.
+    Columns: round, pokemon, hp
+    """
+    return pd.DataFrame(hp_history)
 
 
 
