@@ -4,9 +4,7 @@ An interactive Streamlit dashboard where you pick two Pokémon, choose their mov
 
 ## Deployed App
 
-**Not yet deployed**
-
-> Replace the URL above with your Streamlit Community Cloud link after deploying.
+**(https://pokemongroupproject.streamlit.app/)**
 
 ## Features
 
